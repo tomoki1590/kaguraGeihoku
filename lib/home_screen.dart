@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'main_model.dart';
 import 'page/account_page.dart';
 import 'page/chat_page.dart';
-import 'page/main_page.dart';
-import 'page/post_page.dart';
+import 'page/post/main_list/main_page.dart';
+import 'page/post/post_page.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
