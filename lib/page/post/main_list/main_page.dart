@@ -10,6 +10,10 @@ class MainPage extends StatelessWidget {
     return ChangeNotifierProvider<MainPageModel>(
       create: (_) => MainPageModel()..kaguraFetchList(),
       child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text('郷土芸能自慢'),
+        ),
         body: Center(
           child: Consumer<MainPageModel>(builder: (context, model, child) {
             final List<Kagura>? kaguraData = model.kaguraData;

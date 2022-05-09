@@ -24,9 +24,6 @@ class HomeScreen extends StatelessWidget {
       child: Consumer<MainModel>(builder: (context, model, child) {
         return SafeArea(
           child: Scaffold(
-            appBar: AppBar(
-              title: Text('郷土芸能自慢'),
-            ),
             body: tabs[model.currentIndex],
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: model.currentIndex,
