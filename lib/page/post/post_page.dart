@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kagura_geihoku/home_screen.dart';
 import 'package:kagura_geihoku/page/post/post_page_model.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +29,9 @@ class PostPage extends StatelessWidget {
                                   TextField(
                                     keyboardType: TextInputType.multiline,
                                     maxLines: null,
-                                    controller: model.nameController,
+                                    onChanged: (text) {
+                                      model.name = text;
+                                    },
                                     decoration:
                                         const InputDecoration(hintText: '名称'),
                                     autofocus: true,
@@ -36,37 +39,72 @@ class PostPage extends StatelessWidget {
                                   TextField(
                                     keyboardType: TextInputType.multiline,
                                     maxLines: null,
-                                    controller: model.areaController,
+                                    onChanged: (text) {
+                                      model.area = text;
+                                    },
                                     decoration: const InputDecoration(
                                         hintText: 'どこの芸能'),
                                   ),
                                   TextField(
                                     keyboardType: TextInputType.multiline,
                                     maxLines: null,
-                                    controller: model.kaguraGropeController,
+                                    onChanged: (text) {
+                                      model.kaguraGrope = text;
+                                    },
                                     decoration:
                                         const InputDecoration(hintText: '団体名'),
                                   ),
                                   TextField(
                                     keyboardType: TextInputType.multiline,
                                     maxLines: null,
-                                    controller: model.kaguraGropeController,
+                                    onChanged: (text) {
+                                      model.episode = text;
+                                    },
                                     decoration: const InputDecoration(
                                         hintText: 'あなたの感じる魅力'),
                                   ),
-                                  GestureDetector(
-                                    child: SizedBox(
-                                        height: 200,
-                                        width: 300,
-                                        child: model.imageFile != null
-                                            ? Image.file(model.imageFile!)
-                                            : Icon(Icons.photo)),
-                                    onTap: () async {
-                                      await model.pickImage();
-                                    },
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(children: [
+                                      GestureDetector(
+                                        child: SizedBox(
+                                            height: 200,
+                                            width: 300,
+                                            child: model.imageFile != null
+                                                ? Image.file(model.imageFile!)
+                                                : Icon(Icons.photo)),
+                                        onTap: () async {
+                                          await model.pickImage();
+                                        },
+                                      ),
+                                      GestureDetector(
+                                        child: SizedBox(
+                                            height: 200,
+                                            width: 300,
+                                            child: model.imageVideo != null
+                                                ? Image.file(model.imageVideo!)
+                                                : Icon(Icons.movie)),
+                                        onTap: () async {
+                                          final pickedFile = await model.picker
+                                            ..pickVideo(
+                                                source: ImageSource.gallery);
+                                          if (pickedFile != null) {
+                                            model.pickVideo();
+                                          }
+                                        },
+                                      ),
+                                    ]),
                                   ),
                                   ElevatedButton(
-                                      onPressed: () {}, child: Text('保存')),
+                                      onPressed: () async {
+                                        await model.addPost();
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    HomeScreen()));
+                                      },
+                                      child: Text('保存')),
                                   Container(
                                     width: MediaQuery.of(context).size.width,
                                     height: MediaQuery.of(context).size.height,

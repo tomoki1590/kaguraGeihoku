@@ -12,25 +12,16 @@ class MainPage extends StatelessWidget {
       child: Scaffold(
         body: Center(
           child: Consumer<MainPageModel>(builder: (context, model, child) {
-            final List<Kagura>? kaguraData = model.kagura;
+            final List<Kagura>? kaguraData = model.kaguraData;
             if (kaguraData == null) {
               return CircularProgressIndicator();
             }
 
             final List<Widget> widgets = kaguraData
                 .map(
-                  (kagura) => GestureDetector(
-                    child: ListTile(
-                      leading: kagura.imgURL != null
-                          ? SizedBox(
-                              height: 100,
-                              width: 100,
-                              child: Image.network(kagura.imgURL!))
-                          : null,
-                      title: Text(kagura.name),
-                      subtitle: Text(kagura.area),
-                    ),
-                    onTap: () {},
+                  (kagura) => ListTile(
+                    title: Text(kagura.name),
+                    subtitle: Text(kagura.episode),
                   ),
                 )
                 .toList(); //mapで変換

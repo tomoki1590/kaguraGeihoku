@@ -3,28 +3,28 @@ import 'package:flutter/material.dart';
 import 'package:kagura_geihoku/domain/kagura.dart';
 
 class MainPageModel extends ChangeNotifier {
-  List<Kagura>? kagura;
+  List<Kagura>? kaguraData;
 
   void kaguraFetchList() async {
     final QuerySnapshot snapshot =
-        await FirebaseFirestore.instance.collection('kagura').get();
-    final List<Kagura> kagura = snapshot.docs.map((DocumentSnapshot document) {
+        await FirebaseFirestore.instance.collection('kaguraData').get();
+    final List<Kagura> kaguraData =
+        snapshot.docs.map((DocumentSnapshot document) {
       Map<String, dynamic> data = document.data() as Map<String, dynamic>;
       final String id = document.id;
-      final String area = data['area'];
+      final String episode = data['episode'];
       final String name = data['name'];
-      final String gropeName = data['gropeName'];
       final String? imgURL = data['imgURL'];
-      return Kagura(id, area, name, gropeName, imgURL);
+      return Kagura(id, episode, name, imgURL);
     }).toList();
 
-    this.kagura = kagura;
+    this.kaguraData = kaguraData;
     notifyListeners();
   }
 
   Future delete(Kagura kagura) {
     return FirebaseFirestore.instance
-        .collection('kagura')
+        .collection('kaguraData')
         .doc(kagura.id)
         .delete();
   }

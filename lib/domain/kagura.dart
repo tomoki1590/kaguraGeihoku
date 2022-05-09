@@ -1,8 +1,7 @@
 class Kagura {
-  Kagura(this.id, this.name, this.area, this.gropeName, this.imgURL);
+  Kagura(this.id, this.episode, this.name, this.imgURL);
   String id;
-  String area;
   String name;
+  String episode;
   String? imgURL;
-  String? gropeName;
 }
