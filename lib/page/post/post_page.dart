@@ -51,7 +51,7 @@ class PostPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 30),
                 ),
-                Text('以下の事項埋めてください\n'
+                Text('以下の事項は必ず埋めてください\n'
                     '１.郷土芸能の名前\n'
                     '2.あなたの感じる魅力\n'
                     '3.郷土芸能の写真'),

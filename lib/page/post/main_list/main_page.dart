@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kagura_geihoku/domain/kagura.dart';
+import 'package:kagura_geihoku/page/article_page.dart';
 import 'package:kagura_geihoku/page/post/main_list/main_page_model.dart';
 import 'package:provider/provider.dart';
 

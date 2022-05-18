@@ -5,3 +5,11 @@ class Kagura {
   String episode;
   String? imgURL;
 }
+
+class Account {
+  Account(this.id,this.myName, this.homeaArea, this.likeTraditional);
+  String? myName;
+  String? homeaArea;
+  String? likeTraditional;
+  String? id;
+}
