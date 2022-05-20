@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kagura_geihoku/account/sign_up/signup_model.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +8,8 @@ class AccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _auth = FirebaseAuth.instance;
+
     return ChangeNotifierProvider<SignUpModel>(
       create: (_) => SignUpModel()..myAccountFetch,
       child: Scaffold(
@@ -73,7 +76,12 @@ class AccountPage extends StatelessWidget {
                 ),
               ),
               ListTile(
-                title: Text('ログアウト'),
+                title: GestureDetector(
+                  child: Text('ログアウト'),
+                  onTap: () {
+                    _auth.signOut();
+                  },
+                ),
               )
             ],
           ),

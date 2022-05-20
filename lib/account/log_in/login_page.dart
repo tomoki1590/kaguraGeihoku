@@ -44,7 +44,7 @@ class LoginPage extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => HomeScreen()));
-                      
+
                         try {
                           await model.SingnUp();
                           Navigator.push(
@@ -53,14 +53,30 @@ class LoginPage extends StatelessWidget {
                                   builder: (context) => HomeScreen()));
                         } catch (e) {
                           final snackBar = SnackBar(
-                            backgroundColor: Colors.red,
+                            backgroundColor: Colors.green,
                             content: Text(e.toString()),
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
                       },
-            
                       child: const Text('Login')),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreen()));
+                        if (model.mail == null ||
+                            model.pass == null) //TODO ログのデータに変更すべき
+                        {
+                          final snackBar = SnackBar(
+                            backgroundColor: Colors.green,
+                            content: Text('ゲストとして参加中'),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
+                      },
+                      child: Text('ゲストとして参加する')),
                   const Padding(
                     padding: EdgeInsets.only(top: 30),
                     child: Text("初めての方はこちらから"),

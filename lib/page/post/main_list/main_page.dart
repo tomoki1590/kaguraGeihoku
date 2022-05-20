@@ -24,9 +24,17 @@ class MainPage extends StatelessWidget {
 
             final List<Widget> widgets = kaguraData
                 .map(
-                  (kagura) => ListTile(
-                    title: Text(kagura.name),
-                    subtitle: Text(kagura.episode),
+                  (kagura) => GestureDetector(
+                    child: ListTile(
+                      title: Text(kagura.name),
+                      subtitle: Text(kagura.episode),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (kagura) => ArticlePage()));
+                    },
                   ),
                 )
                 .toList(); //mapで変換

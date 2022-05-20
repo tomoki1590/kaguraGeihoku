@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
                 return const SizedBox();
               }
               if (snapshot.hasData) {
-                return LoginPage();
+                return HomeScreen();
               }
               return LoginPage();
             }));
