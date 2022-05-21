@@ -15,7 +15,9 @@ class MainPageModel extends ChangeNotifier {
       final String episode = data['episode'];
       final String name = data['name'];
       final String? imgURL = data['imgURL'];
-      return Kagura(id, episode, name, imgURL);
+      final Timestamp? createdTime = data['createdTime'];
+      final Timestamp? updateTime = data['updateTime'];
+      return Kagura(id, episode, name, imgURL, createdTime, updateTime);
     }).toList();
 
     this.kaguraData = kaguraData;

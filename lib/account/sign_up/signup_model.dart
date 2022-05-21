@@ -8,6 +8,7 @@ class SignUpModel extends ChangeNotifier {
 
   final mailAdress = TextEditingController();
   final passWord = TextEditingController();
+  final accountName = TextEditingController();
 
   String? mail;
   String? pass;
@@ -25,11 +26,17 @@ class SignUpModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setName(String myName) {
+    this.myName = myName;
+    notifyListeners();
+  }
+
   Future SingnUp() async {
     mail = mailAdress.text;
     pass = passWord.text;
+    myName = accountName.text;
 
-    if (mail != null && pass != null) {
+    if (mail != null && pass != null && myName != null) {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: mail!, password: pass!);
       notifyListeners();
@@ -45,8 +52,7 @@ class SignUpModel extends ChangeNotifier {
     });
   }
 
-  Future myAccountFetch(
-      Account myAccount)async{
+  Future myAccountFetch(Account myAccount) async {
     return await FirebaseFirestore.instance
         .collection('myAccount')
         .doc(myAccount.id)

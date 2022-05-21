@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../auth_model.dart';
 import '../log_in/login_page.dart';
 import 'signup_model.dart';
 
@@ -25,30 +24,31 @@ class SignUp extends StatelessWidget {
                 //   radius: 50,
                 //   child: const Icon(Icons.add),
                 // ),
+                Text('注意：＊は必須項目です'),
                 SizedBox(
                   width: 300,
                   child: TextField(
-                     onChanged: (text) {
-                                    model.myName = text;
-                                  },
-                    decoration: const InputDecoration(hintText: '名前'),
+                    onChanged: (text) {
+                      model.setName(text);
+                    },
+                    decoration: const InputDecoration(hintText: '名前＊'),
                   ),
                 ),
                 SizedBox(
                   width: 300,
                   child: TextField(
-                     onChanged: (text) {
-                                    model.homeArea = text;
-                                  },
+                    onChanged: (text) {
+                      model.homeArea = text;
+                    },
                     decoration: const InputDecoration(hintText: '出身地域'),
                   ),
                 ),
                 SizedBox(
                   width: 300,
                   child: TextField(
-                     onChanged: (text) {
-                                    model.likeTraditional = text;
-                                  },
+                    onChanged: (text) {
+                      model.likeTraditional = text;
+                    },
                     decoration: const InputDecoration(hintText: '好きな伝統・郷土芸能'),
                   ),
                 ),
@@ -57,6 +57,9 @@ class SignUp extends StatelessWidget {
                   child: TextField(
                     controller: model.mailAdress,
                     decoration: const InputDecoration(hintText: 'メールアドレス＊'),
+                    onChanged: (text) {
+                      model.setMail(text);
+                    },
                   ),
                 ),
                 SizedBox(
@@ -64,25 +67,23 @@ class SignUp extends StatelessWidget {
                   child: TextField(
                     controller: model.passWord,
                     decoration: const InputDecoration(hintText: 'パスワード＊'),
+                    onChanged: (text) {
+                      model.setPass(text);
+                    },
                   ),
                 ),
-                  ElevatedButton(
-                      onPressed: () async {
-                        model.addAccount();
-                        if (model.mailAdress.text.isNotEmpty &&
-                            model.passWord.text.isNotEmpty) {
-                          var result = await Authentication.signUp(
-                              email: model.mailAdress.text,
-                              pass: model.passWord.text);
-                          {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const LoginPage()));
-                          }
-                        }
-                      },
-                      child: const Text("新規アカウント作成")),
+                ElevatedButton(
+                    onPressed: () async {
+                      model.addAccount();
+                      if (model.mailAdress.text.isNotEmpty &&
+                          model.passWord.text.isNotEmpty) {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginPage()));
+                      }
+                    },
+                    child: const Text("新規アカウント作成")),
               ],
             );
           }),

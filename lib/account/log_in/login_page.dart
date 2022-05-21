@@ -28,6 +28,9 @@ class LoginPage extends StatelessWidget {
                       child: TextField(
                         controller: model.mailAdress,
                         decoration: const InputDecoration(hintText: "メールアドレス"),
+                        onChanged: (text) {
+                          model.setMail(text);
+                        },
                       ),
                     ),
                   ),
@@ -36,14 +39,19 @@ class LoginPage extends StatelessWidget {
                     child: TextField(
                       controller: model.passWord,
                       decoration: const InputDecoration(hintText: 'パスワード'),
+                      onChanged: (text) {
+                        model.setPass(text);
+                      },
                     ),
                   ),
                   ElevatedButton(
                       onPressed: () async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomeScreen()));
+                        if (model.mail != null &&
+                            model.pass != null) //TODO Userの有無によって許可
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomeScreen()));
 
                         try {
                           await model.SingnUp();

@@ -7,11 +7,13 @@ class Authentication {
   static User? currentUser;
   static Account? myAccount;
   static Future<dynamic> signUp(
-      {required String email, required String pass}) async {
+      {required String email,
+      required String pass,
+      required String name}) async {
     try {
       UserCredential newAccount = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: pass);
-      print(' rezistor ');
+      print(' 登録完了 ');
       return newAccount;
     } on FirebaseAuthException catch (e) {
       print('$e');
@@ -25,7 +27,7 @@ class Authentication {
       final UserCredential results = await _firebaseAuth
           .signInWithEmailAndPassword(email: email, password: pass);
       currentUser = results.user;
-      print('login finished');
+      print('ログイン完了');
       return results;
     } on FirebaseAuthException catch (e) {
       print('auth lost,$e');

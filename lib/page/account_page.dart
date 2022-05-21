@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:kagura_geihoku/account/log_in/login_page.dart';
 import 'package:kagura_geihoku/account/sign_up/signup_model.dart';
+import 'package:kagura_geihoku/post_data_parts.dart';
 import 'package:provider/provider.dart';
 
 class AccountPage extends StatelessWidget {
@@ -18,7 +20,6 @@ class AccountPage extends StatelessWidget {
           actions: [
             ElevatedButton(
                 onPressed: () async {
-                  // await model.addPost();
                   showDialog(
                       context: context,
                       builder: (_) {
@@ -55,37 +56,49 @@ class AccountPage extends StatelessWidget {
                   color: Colors.black54,
                 ),
                 Text('過去の投稿一覧'),
+                SizedBox(height: 300, child: PostDataParts())
               ],
             );
           }),
         ),
-        drawer: Drawer(
-          child: ListView(
-            children: [
-              DrawerHeader(
-                child: Column(
-                  children: [
-                    Text('アプリ情報'),
-                    ListTile(
-                      title: Text('アカウントID：'),
-                    ),
-                    ListTile(
-                      title: Text('登録されたアドレス'),
-                    )
-                  ],
+        drawer: Consumer<SignUpModel>(builder: (context, model, child) {
+          return Drawer(
+            child: ListView(
+              children: [
+                DrawerHeader(
+                  child: Column(
+                    children: [
+                      Text('アプリ情報'),
+                      ListTile(
+                        title: Text('アカウントID：'),
+                      ),
+                      ListTile(
+                        title: Text('登録されたアドレス:${model.mail}'),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              ListTile(
-                title: GestureDetector(
-                  child: Text('ログアウト'),
-                  onTap: () {
-                    _auth.signOut();
-                  },
+                ListTile(
+                  title: GestureDetector(
+                    child: Text('ログアウト'),
+                    onTap: () {
+                      _auth.signOut();
+                    },
+                  ),
                 ),
-              )
-            ],
-          ),
-        ),
+                ListTile(
+                  title: GestureDetector(
+                    child: Text('ログイン'),
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => LoginPage()));
+                    },
+                  ),
+                )
+              ],
+            ),
+          );
+        }),
       ),
     );
   }
