@@ -12,9 +12,9 @@ class Kagura {
 }
 
 class Account {
-  Account(this.id, this.myName, this.homeArea, this.likeTraditional);
+  Account(this.uid, this.myName, this.homeArea, this.likeTraditional);
   String? myName;
   String? homeArea;
   String? likeTraditional;
-  String? id;
+  String? uid;
 }

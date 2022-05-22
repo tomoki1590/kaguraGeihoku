@@ -23,7 +23,7 @@ class LoginModel extends ChangeNotifier {
 
     if (mail != null && pass != null) {
       await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: mail!, password: pass!);
+          .signInWithEmailAndPassword(email: mail!, password: pass!);
       notifyListeners();
     }
   }

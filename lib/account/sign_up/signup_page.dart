@@ -29,7 +29,7 @@ class SignUp extends StatelessWidget {
                   width: 300,
                   child: TextField(
                     onChanged: (text) {
-                      model.setName(text);
+                      model.myName = text;
                     },
                     decoration: const InputDecoration(hintText: '名前＊'),
                   ),
@@ -74,7 +74,7 @@ class SignUp extends StatelessWidget {
                 ),
                 ElevatedButton(
                     onPressed: () async {
-                      model.addAccount();
+                      model.SignUp();
                       if (model.mailAdress.text.isNotEmpty &&
                           model.passWord.text.isNotEmpty) {
                         Navigator.pushReplacement(

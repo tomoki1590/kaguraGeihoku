@@ -8,13 +8,13 @@ class SignUpModel extends ChangeNotifier {
 
   final mailAdress = TextEditingController();
   final passWord = TextEditingController();
-  final accountName = TextEditingController();
-
   String? mail;
   String? pass;
   String? myName;
   String? homeArea;
   String? likeTraditional;
+  String? uid;
+  Account? account;
 
   void setMail(String mail) {
     this.mail = mail;
@@ -26,36 +26,34 @@ class SignUpModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setName(String myName) {
-    this.myName = myName;
-    notifyListeners();
-  }
-
-  Future SingnUp() async {
+  Future SignUp() async {
     mail = mailAdress.text;
     pass = passWord.text;
-    myName = accountName.text;
 
-    if (mail != null && pass != null && myName != null) {
+    if (mail != null && pass != null) {
       await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: mail!, password: pass!);
-      notifyListeners();
+          .createUserWithEmailAndPassword(email: mail!, password: pass!)
+          .then((currentUser) => FirebaseFirestore.instance
+                  .collection("myAccount")
+                  .doc(currentUser.user!.uid)
+                  .set({
+                "uid": currentUser.user!.uid,
+                "email": mailAdress.text,
+                'homeArea': homeArea,
+                'myName': myName,
+                'likeTraditional': likeTraditional,
+              }));
     }
   }
 
-  Future addAccount() async {
-    final doc = FirebaseFirestore.instance.collection('myAccount').doc();
-    await doc.set({
-      'myName': myName,
-      'homeArea': homeArea,
-      'likeTraditional': likeTraditional,
-    });
-  }
-
-  Future myAccountFetch(Account myAccount) async {
-    return await FirebaseFirestore.instance
+  void myAccountFetch() async {
+    print('iru?');
+    final DocumentSnapshot snapshot = await FirebaseFirestore.instance
         .collection('myAccount')
-        .doc(myAccount.id)
+        .doc('J4LFUyPIkgbZkA0M8HJNDPJl7JP2')
         .get();
+    myName = snapshot.get('myName');
+    uid = snapshot.get('uid');
+    print('Nullだよ');
   }
 }

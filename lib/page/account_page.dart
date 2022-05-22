@@ -40,6 +40,8 @@ class AccountPage extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Consumer<SignUpModel>(builder: (context, model, child) {
+            print('kokoha?');
+            model.myAccountFetch();
             return Column(
               children: [
                 GestureDetector(
@@ -48,7 +50,7 @@ class AccountPage extends StatelessWidget {
                   ),
                   onTap: () {},
                 ),
-                Text('ユーザーネーム：${model.myName}'),
+                Text('ユーザーネーム：${model.uid}'),
                 Text('出身地域：${model.homeArea}'),
                 Text('好きな伝統・郷土芸能：${model.likeTraditional}'),
                 Text('一言コメント'),

@@ -11,10 +11,10 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
 
   List<Widget> tabs = <Widget>[
-    MainPage(),
-    PostPage(),
-    ChatPage(),
-    AccountPage()
+    const MainPage(),
+    const PostPage(),
+    const ChatPage(),
+    const AccountPage()
   ];
 
   @override
@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
               onTap: (index) {
                 model.currentIndex = index;
               },
-              items: [
+              items: const [
                 BottomNavigationBarItem(icon: Icon(Icons.home), label: '一覧ページ'),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.photo), label: '投稿ページ'),
