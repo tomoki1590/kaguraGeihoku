@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:kagura_geihoku/account/edit_account.dart';
 import 'package:kagura_geihoku/account/log_in/login_page.dart';
-import 'package:kagura_geihoku/account/sign_up/signup_model.dart';
+import 'package:kagura_geihoku/account/userdata.dart';
 import 'package:kagura_geihoku/post_data_parts.dart';
 import 'package:provider/provider.dart';
 
@@ -12,8 +13,8 @@ class AccountPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final _auth = FirebaseAuth.instance;
 
-    return ChangeNotifierProvider<SignUpModel>(
-      create: (_) => SignUpModel()..myAccountFetch,
+    return ChangeNotifierProvider<UserModel>(
+      create: (_) => UserModel(),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('アカウントページ'),
@@ -23,10 +24,13 @@ class AccountPage extends StatelessWidget {
                   showDialog(
                       context: context,
                       builder: (_) {
-                        return AlertDialog(title: Text('保存しますか？'), actions: [
+                        return AlertDialog(title: Text('編集しますか？'), actions: [
                           TextButton(
                               onPressed: () {
-                                Navigator.pop(context);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => EditAccount()));
                               },
                               child: Text('yes')),
                           TextButton(
@@ -35,13 +39,11 @@ class AccountPage extends StatelessWidget {
                         ]);
                       });
                 },
-                child: Text('保存'))
+                child: Text('編集'))
           ],
         ),
         body: SingleChildScrollView(
-          child: Consumer<SignUpModel>(builder: (context, model, child) {
-            print('kokoha?');
-            model.myAccountFetch();
+          child: Consumer<UserModel>(builder: (context, model, child) {
             return Column(
               children: [
                 GestureDetector(
@@ -50,9 +52,9 @@ class AccountPage extends StatelessWidget {
                   ),
                   onTap: () {},
                 ),
-                Text('ユーザーネーム：${model.uid}'),
-                Text('出身地域：${model.homeArea}'),
-                Text('好きな伝統・郷土芸能：${model.likeTraditional}'),
+                Text('ユーザーネーム：${model.mail}'),
+                Text('出身地域：'),
+                Text('好きな伝統・郷土芸能：'),
                 Text('一言コメント'),
                 Divider(
                   color: Colors.black54,
@@ -63,7 +65,7 @@ class AccountPage extends StatelessWidget {
             );
           }),
         ),
-        drawer: Consumer<SignUpModel>(builder: (context, model, child) {
+        drawer: Consumer<UserModel>(builder: (context, model, child) {
           return Drawer(
             child: ListView(
               children: [
@@ -72,10 +74,10 @@ class AccountPage extends StatelessWidget {
                     children: [
                       Text('アプリ情報'),
                       ListTile(
-                        title: Text('アカウントID：'),
+                        title: Text('アカウントID：${model.myName}'),
                       ),
                       ListTile(
-                        title: Text('登録されたアドレス:${model.mail}'),
+                        title: Text('登録されたアドレス:'),
                       )
                     ],
                   ),

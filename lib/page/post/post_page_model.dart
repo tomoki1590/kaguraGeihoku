@@ -25,12 +25,6 @@ class PostPageModel extends ChangeNotifier {
 
   final picker = ImagePicker();
   Future addPost() async {
-    // if (name == null || name == '') {
-    //   throw '名称は書いてー';
-    // }
-    // if (episode == null || episode!.isEmpty) {
-    //   throw '感想かいてー';
-    // }
     final doc = FirebaseFirestore.instance.collection('kaguraData').doc();
     if (imageFile != null) {
       //imageFileをストレージにあげる

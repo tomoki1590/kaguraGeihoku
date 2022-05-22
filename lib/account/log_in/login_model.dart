@@ -7,17 +7,7 @@ class LoginModel extends ChangeNotifier {
   String? mail;
   String? pass;
 
-  void setMail(String mail) {
-    this.mail = mail;
-    notifyListeners();
-  }
-
-  void setPass(String pass) {
-    this.pass = pass;
-    notifyListeners();
-  }
-
-  Future SingnUp() async {
+  Future emailSignIn() async {
     mail = mailAdress.text;
     pass = passWord.text;
 

@@ -1,18 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
-
-import 'account.dart';
+import 'package:kagura_geihoku/domain/kagura.dart';
 
 class Authentication {
   static final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   static User? currentUser;
   static Account? myAccount;
   static Future<dynamic> signUp(
-      {required String email,
+      {required String mail,
       required String pass,
       required String name}) async {
     try {
       UserCredential newAccount = await _firebaseAuth
-          .createUserWithEmailAndPassword(email: email, password: pass);
+          .createUserWithEmailAndPassword(email: mail, password: pass);
       print(' 登録完了 ');
       return newAccount;
     } on FirebaseAuthException catch (e) {
@@ -22,7 +21,9 @@ class Authentication {
   }
 
   static Future<dynamic> emailSignIn(
-      {required String email, required String pass}) async {
+      {required String email,
+      required String pass,
+      required String name}) async {
     try {
       final UserCredential results = await _firebaseAuth
           .signInWithEmailAndPassword(email: email, password: pass);

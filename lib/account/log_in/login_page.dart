@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:kagura_geihoku/account/log_in/login_model.dart';
+import 'package:kagura_geihoku/account/sign_up/signup_page.dart';
 import 'package:provider/provider.dart';
 
 import '../../home_screen.dart';
-import '../sign_up/signup_page.dart';
-import 'login_model.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,7 @@ class LoginPage extends StatelessWidget {
                         controller: model.mailAdress,
                         decoration: const InputDecoration(hintText: "メールアドレス"),
                         onChanged: (text) {
-                          model.setMail(text);
+                          model.mailAdress.text;
                         },
                       ),
                     ),
@@ -40,7 +43,7 @@ class LoginPage extends StatelessWidget {
                       controller: model.passWord,
                       decoration: const InputDecoration(hintText: 'パスワード'),
                       onChanged: (text) {
-                        model.setPass(text);
+                        model.passWord.text;
                       },
                     ),
                   ),
@@ -54,7 +57,7 @@ class LoginPage extends StatelessWidget {
                                   builder: (context) => HomeScreen()));
 
                         try {
-                          await model.SingnUp();
+                          await model.emailSignIn();
                           Navigator.push(
                               context,
                               MaterialPageRoute(
