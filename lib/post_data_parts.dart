@@ -18,9 +18,42 @@ ChangeNotifierProvider<MainPageModel> PostDataParts() {
         final List<Widget> widgets = kaguraData
             .map(
               (kagura) => GestureDetector(
-                child: ListTile(
-                  title: Text(kagura.name),
-                  subtitle: Text(kagura.episode),
+                child: Column(
+                  children: [
+                    Divider(
+                      color: Colors.black12,
+                    ),
+                    Card(
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(100),
+                                child: Image.network(
+                                  kagura.imgURL!,
+                                  width: 50,
+                                  height: 50,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                              Text(kagura.name)
+
+                              ///TODO Accountデータに変更
+                            ],
+                          ),
+                          SizedBox(
+                              width: 200,
+                              height: 200,
+                              child: Image.network(kagura.imgURL!)),
+                          ListTile(
+                            title: Text("芸能名:${kagura.name}"),
+                            subtitle: Text("魅力:${kagura.episode}"),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
                 onTap: () {
                   Navigator.push(context,

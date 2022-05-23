@@ -12,7 +12,6 @@ class PostPageModel extends ChangeNotifier {
   final kaguraGropeController = TextEditingController();
   final episodeController = TextEditingController();
   VideoPlayerController? controller;
-
   String? episode;
   String? name;
   String? area;
@@ -38,7 +37,8 @@ class PostPageModel extends ChangeNotifier {
       'episode': episode,
       'area': area,
       'kaguraGrope': kaguraGrope,
-      'imgURL': imgURL
+      'imgURL': imgURL,
+      'createdTime': Timestamp.now()
     });
   }
 
