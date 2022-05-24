@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import 'main_model.dart';
 import 'page/account_page.dart';
-import 'page/chat_page.dart';
 import 'page/post/main_list/main_page.dart';
 import 'page/post/post_page.dart';
 
@@ -13,7 +12,7 @@ class HomeScreen extends StatelessWidget {
   List<Widget> tabs = <Widget>[
     const MainPage(),
     const PostPage(),
-    const ChatPage(),
+    // const ChatPage(),
     const AccountPage()
   ];
 
@@ -34,8 +33,8 @@ class HomeScreen extends StatelessWidget {
                 BottomNavigationBarItem(icon: Icon(Icons.home), label: '一覧ページ'),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.photo), label: '投稿ページ'),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.chat), label: 'チャットページ'),
+                // BottomNavigationBarItem(
+                //     icon: Icon(Icons.chat), label: 'チャットページ'),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.account_box_outlined), label: 'アカウントページ'),
               ],

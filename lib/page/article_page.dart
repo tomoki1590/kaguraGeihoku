@@ -15,39 +15,24 @@ class ArticlePage extends StatelessWidget {
             title: Text('記事'),
           ),
           body: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Container(
-              child: Column(
-                children: [
-                  Text(''),
-                  Text('郷土芸能の名前'),
-                  Text('投稿した団体名'),
-                  Text('投稿した地域と芸能の地域'),
-                  Text('あなたの感じる魅力'),
-                  Row(
-                    children: [
-                      Stack(
-                        children: [
-                          SizedBox(
-                            height: 300,
-                            width: 300,
-                            child: Container(),
-                          ),
-                          Image.network(
-                            "https://pbs.twimg.com/media/Dt5OowNU0AAznML?format=jpg&name=large",
-                            width: 300,
-                            height: 300,
-                          ),
-                        ],
-                      ),
-                      Image.network(
-                        "https://pbs.twimg.com/media/DhO-r07U8AEMv8W.jpg",
+            child: Card(
+              child: Container(
+                child: Column(
+                  children: [
+                    Text('投稿日：'),
+                    Text('郷土芸能の名前:${model.kaguraData}'),
+                    Text('団体名：'),
+                    Text('芸能の地域：'),
+                    Text('あなたの感じる魅力：'),
+                    Center(
+                      child: Image.network(
+                        "https://pbs.twimg.com/media/Dt5OowNU0AAznML?format=jpg&name=large",
                         width: 300,
                         height: 300,
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

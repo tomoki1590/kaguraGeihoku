@@ -72,11 +72,4 @@ class UserFireStore {
       return false;
     }
   }
-  //
-  // void myAccountFetch() async {
-  //   final DocumentSnapshot snapshot =
-  //       await FirebaseFirestore.instance.collection('myAccount').doc().get();
-  //   myName = snapshot.get('myName');
-  //   uid = snapshot.get('uid');
-  // }
 }
